@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link as CustomLink } from "react-router-dom";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -151,10 +152,20 @@ export default function Navigation(props) {
           >
             {brandSmall}
           </Link>
-          <Button color="inherit" className={classes.secondaryButton}>
+          <Button
+            color="inherit"
+            className={classes.secondaryButton}
+            component={CustomLink}
+            to="/login"
+          >
             {content["secondary-action"]}
           </Button>
-          <Button variant="contained" color="secondary">
+          <Button
+            variant="contained"
+            color="secondary"
+            component={CustomLink}
+            to="/register"
+          >
             {content["primary-action"]}
           </Button>
         </Toolbar>
@@ -167,19 +178,34 @@ export default function Navigation(props) {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            <ListItem button key={content["link1"]}>
+            <ListItem
+              button
+              key={content["link1"]}
+              component={CustomLink}
+              to="/"
+            >
               <ListItemIcon>
                 <AppsIcon />
               </ListItemIcon>
               <ListItemText primary={content["link1"]} />
             </ListItem>
-            <ListItem button key={content["link2"]}>
+            <ListItem
+              button
+              key={content["link2"]}
+              component={CustomLink}
+              to="/home"
+            >
               <ListItemIcon>
                 <BusinessCenterIcon />
               </ListItemIcon>
               <ListItemText primary={content["link2"]} />
             </ListItem>
-            <ListItem button key={content["link3"]}>
+            <ListItem
+              button
+              key={content["link3"]}
+              component={CustomLink}
+              to="/services"
+            >
               <ListItemIcon>
                 <LiveHelpIcon />
               </ListItemIcon>
@@ -209,7 +235,12 @@ export default function Navigation(props) {
               </ListItemIcon>
               <ListItemText primary={content["link2"]} />
             </ListItem>
-            <ListItem button key={content["link3"]}>
+            <ListItem
+              button
+              key={content["link3"]}
+              component={CustomLink}
+              to="/service"
+            >
               <ListItemIcon>
                 <LiveHelpIcon />
               </ListItemIcon>
