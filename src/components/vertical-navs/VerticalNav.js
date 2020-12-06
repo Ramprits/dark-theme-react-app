@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link as CustomLink } from "react-router-dom";
+import { Link as CustomLink, useHistory } from "react-router-dom";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -19,6 +19,9 @@ import AppsIcon from "@material-ui/icons/Apps";
 import BusinessCenterIcon from "@material-ui/icons/BusinessCenter";
 import LiveHelpIcon from "@material-ui/icons/LiveHelp";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+import { useDispatch, useSelector } from "react-redux";
+import { auth } from "../../firebase/firebase-config";
+import { userSignOut } from "../../redux/user/user.actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,8 +71,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Navigation(props) {
+  const history = useHistory();
   const classes = useStyles();
-
+  const { currentUser } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const content = {
     brand: { image: "mui-assets/img/logo-pied-piper-white.png", width: 120 },
     "brand-small": {
@@ -82,6 +87,7 @@ export default function Navigation(props) {
     link4: "contact",
     "secondary-action": "Sign in",
     "primary-action": "Sign up",
+    "primary-sign-out": "Sign out",
     ...props.content,
   };
 
@@ -120,6 +126,11 @@ export default function Navigation(props) {
 
     setState({ ...state, open });
   };
+  const handleSignOut = () => {
+    auth.signOut();
+    dispatch(userSignOut());
+    history.push("/login");
+  };
 
   return (
     <div className={classes.root}>
@@ -152,22 +163,38 @@ export default function Navigation(props) {
           >
             {brandSmall}
           </Link>
-          <Button
-            color="inherit"
-            className={classes.secondaryButton}
-            component={CustomLink}
-            to="/login"
-          >
-            {content["secondary-action"]}
-          </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            component={CustomLink}
-            to="/register"
-          >
-            {content["primary-action"]}
-          </Button>
+          {currentUser ? (
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => {
+                auth.signOut();
+                dispatch(userSignOut());
+                history.push("/login");
+              }}
+            >
+              {content["primary-sign-out"]}
+            </Button>
+          ) : (
+            <>
+              <Button
+                color="inherit"
+                className={classes.secondaryButton}
+                component={CustomLink}
+                to="/login"
+              >
+                {content["secondary-action"]}
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                component={CustomLink}
+                to="/register"
+              >
+                {content["primary-action"]}
+              </Button>
+            </>
+          )}
         </Toolbar>
       </AppBar>
       <Drawer

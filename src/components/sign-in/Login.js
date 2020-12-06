@@ -10,6 +10,8 @@ import TextField from "@material-ui/core/TextField";
 import { useForm } from "react-hook-form";
 import { auth } from "../../firebase/firebase-config";
 import { useHistory } from "react-router-dom";
+import { setUser } from "../../redux/user/user.actions";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   tertiaryAction: {
@@ -27,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Login(props) {
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch();
   const { register, handleSubmit } = useForm({
     defaultValues: {
       email: "rampritsahani@gmail.com",
@@ -54,7 +57,17 @@ export default function Login(props) {
   }
 
   const handleLogin = (data) => {
-    auth.signInWithEmailAndPassword(data.email, data.password);
+    auth.signInWithEmailAndPassword(data.email, data.password).then((user) => {
+      if (user)
+        dispatch(
+          setUser({
+            email: user.email,
+            displayName: user.displayName,
+            emailVerified: user.emailVerified,
+          })
+        );
+    });
+
     history.push("/");
   };
   return (

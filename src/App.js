@@ -8,27 +8,29 @@ import LoginPage from "./pages/Login.js";
 import RegisterPage from "./pages/Register.js";
 import NotfoundPage from "./pages/Notfound.js";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentUser } from "./firebase/firebase-config.js";
+import {
+  auth,
+  createUserProfileDocument,
+  getCurrentUser,
+} from "./firebase/firebase-config.js";
 import { setUser } from "./redux/user/user.actions.js";
 const history = createBrowserHistory();
 
 export default function App() {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
+
   useEffect(() => {
-    getCurrentUser().then((user) => {
-      if (user) {
-        dispatch(
-          setUser({
-            email: user.email,
-            displayName: user.displayName,
-            emailVerified: user.emailVerified,
-          })
-        );
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      if (userAuth) {
+        dispatch(setUser(userAuth));
       }
     });
-    return () => {};
+    return () => {
+      unsubscribe();
+    };
   }, []);
+
   return (
     <Router history={history}>
       <Switch>

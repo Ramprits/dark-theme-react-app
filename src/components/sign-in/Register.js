@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -9,12 +9,17 @@ import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { useForm } from "react-hook-form";
-import { auth } from "../../firebase/firebase-config";
+import {
+  auth,
+  createUserProfileDocument,
+} from "../../firebase/firebase-config";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/user/user.actions";
 
 export default function Register(props) {
   const history = useHistory();
-  console.log(props);
+  const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm({
     defaultValues: {
       email: "rampritsahani@gmail.com",
@@ -40,10 +45,21 @@ export default function Register(props) {
     brand = content.brand.text || "";
   }
 
-  const onSubmit = (data) => {
-    auth.createUserWithEmailAndPassword(data.email, data.password);
-    history.push("/");
-  };
+  const onSubmit = useCallback(
+    (data) => {
+      auth
+        .createUserWithEmailAndPassword(data.email, data.password)
+        .then((response) => {
+          createUserProfileDocument(response.user, {
+            firstName: data.firstName,
+            lastName: data.lastName,
+          });
+        });
+
+      history.push("/");
+    },
+    [history]
+  );
 
   return (
     <section>

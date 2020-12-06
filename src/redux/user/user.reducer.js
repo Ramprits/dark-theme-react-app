@@ -1,4 +1,4 @@
-import { SET_USER, USER_ERROR } from "./user.types";
+import { SET_USER, USER_ERROR, USER_SIGN_OUT } from "./user.types";
 
 const initialState = {
   currentUser: null,
@@ -13,6 +13,9 @@ export default (state = initialState, { type, payload }) => {
 
     case USER_ERROR:
       return { ...state, error: payload, loading: false };
+
+    case USER_SIGN_OUT:
+      return { ...state, currentUser: null };
 
     default:
       return state;
