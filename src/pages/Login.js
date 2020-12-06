@@ -2,7 +2,7 @@ import React from "react";
 
 import SignIn from "../components/sign-in/Login";
 
-export default function Login() {
+export default function Login(props) {
   return (
     <React.Fragment>
       <SignIn
@@ -13,6 +13,7 @@ export default function Login() {
             width: "100",
           },
           "02_header": "Welcome Back",
+          ...props,
         }}
       />
     </React.Fragment>

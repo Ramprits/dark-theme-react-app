@@ -1,6 +1,6 @@
 import React from "react";
 
-import VerticalNav3 from "../components/vertical-navs/VerticalNav3";
+import VerticalNav3 from "../components/vertical-navs/VerticalNav";
 import Header from "../components/headers/Header4";
 import Features from "../components/features/Features4";
 
