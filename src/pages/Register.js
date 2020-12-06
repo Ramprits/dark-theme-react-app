@@ -1,40 +1,19 @@
-import React from 'react';
+import React from "react";
 
-import VerticalNav3 from '../components/vertical-navs/VerticalNav3';
-import SignIn1 from '../components/sign-in/SignIn1';
+import SignUp from "../components/sign-in/Register";
 
 export default function Register() {
   return (
     <React.Fragment>
-      <VerticalNav3
+      <SignUp
         content={{
           brand: {
-            text: 'Mobile Programming',
-            image: '/images/logo-white.png',
-            width: '70',
+            text: "Mobile Programming",
+            image: "/images/logo-white.png",
+            width: "100",
           },
-          'brand-small': {
-            text: 'Mobile Programming',
-            image: '/images/logo-white.png',
-            width: '50',
-          },
-          link2: 'Home',
-          link3: 'Product',
-          link4: 'Service',
         }}
-        bucketMain={[
-          <SignIn1
-            content={{
-              brand: {
-                text: 'Mobile Programming',
-                image: '/images/logo-white.png',
-                width: '100',
-              },
-            }}
-          />,
-        ]}
       />
     </React.Fragment>
   );
 }
-

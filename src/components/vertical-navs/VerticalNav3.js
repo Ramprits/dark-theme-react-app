@@ -227,8 +227,8 @@ export default function Navigation(props) {
       <main className={classes.content}>
         <Toolbar />
         <div>
-          {buckets["main"].map((component) => (
-            <React.Fragment>{component}</React.Fragment>
+          {buckets["main"].map((component, idx) => (
+            <React.Fragment key={idx}>{component}</React.Fragment>
           ))}
         </div>
       </main>

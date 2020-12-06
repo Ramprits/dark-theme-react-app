@@ -1,8 +1,8 @@
 import React from "react";
 
 import VerticalNav3 from "../components/vertical-navs/VerticalNav3";
-import Header4 from "../components/headers/Header4";
-import Features4 from "../components/features/Features4";
+import Header from "../components/headers/Header4";
+import Features from "../components/features/Features4";
 
 export default function Index() {
   return (
@@ -23,7 +23,11 @@ export default function Index() {
           link3: "Product",
           link4: "Service",
         }}
-        bucketMain={[<Header4 content={null} />, <Features4 content={null} />]}
+        bucketMain={[
+          <React.Fragment>
+            <Header content={null} />, <Features content={null} />
+          </React.Fragment>,
+        ]}
       />
     </React.Fragment>
   );
