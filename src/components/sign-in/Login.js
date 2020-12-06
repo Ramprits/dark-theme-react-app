@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { useForm } from "react-hook-form";
 import { auth } from "../../firebase/firebase-config";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   tertiaryAction: {
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login(props) {
   const classes = useStyles();
+  const history = useHistory();
   const { register, handleSubmit } = useForm({
     defaultValues: {
       email: "rampritsahani@gmail.com",
@@ -53,7 +55,7 @@ export default function Login(props) {
 
   const handleLogin = (data) => {
     auth.signInWithEmailAndPassword(data.email, data.password);
-    props.content.history.push("/");
+    history.push("/");
   };
   return (
     <Container maxWidth="xs">

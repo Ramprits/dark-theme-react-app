@@ -10,8 +10,10 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { useForm } from "react-hook-form";
 import { auth } from "../../firebase/firebase-config";
+import { useHistory } from "react-router-dom";
 
 export default function Register(props) {
+  const history = useHistory();
   console.log(props);
   const { register, handleSubmit, errors } = useForm({
     defaultValues: {
@@ -40,7 +42,7 @@ export default function Register(props) {
 
   const onSubmit = (data) => {
     auth.createUserWithEmailAndPassword(data.email, data.password);
-    props.content.history.push("/");
+    history.push("/");
   };
 
   return (
