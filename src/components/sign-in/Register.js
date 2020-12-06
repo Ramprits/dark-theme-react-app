@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import { Link as CustomLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import {
   auth,
@@ -15,7 +16,6 @@ import {
 } from "../../firebase/firebase-config";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../redux/user/user.actions";
 
 export default function Register(props) {
   const history = useHistory();
@@ -54,9 +54,11 @@ export default function Register(props) {
             firstName: data.firstName,
             lastName: data.lastName,
           });
+          history.push("/");
+        })
+        .catch((err) => {
+          console.error(err);
         });
-
-      history.push("/");
     },
     [history]
   );
@@ -147,7 +149,7 @@ export default function Register(props) {
                 </Button>
               </Box>
               <Box textAlign="right">
-                <Link href="#" variant="body2">
+                <Link component={CustomLink} to="/login" variant="body2">
                   {content["01_secondary-action"]}
                 </Link>
               </Box>

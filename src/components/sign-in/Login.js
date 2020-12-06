@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { Link as CustomLink } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
@@ -122,7 +123,12 @@ export default function Login(props) {
             </Box>
             <Grid container spacing={2} className={classes.actions}>
               <Grid item xs={12} sm={6}>
-                <Link href="#" variant="body2">
+                <Link
+                  href="#"
+                  variant="body2"
+                  component={CustomLink}
+                  to="/register"
+                >
                   {content["02_secondary-action"]}
                 </Link>
               </Grid>

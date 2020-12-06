@@ -81,10 +81,8 @@ export default function Navigation(props) {
       image: "mui-assets/img/logo-pied-piper-white-icon.png",
       width: 32,
     },
-    link1: "Features",
-    link2: "Enterprise",
-    link3: "Support",
-    link4: "contact",
+    product: "Product",
+    contact: "contact",
     "secondary-action": "Sign in",
     "primary-action": "Sign up",
     "primary-sign-out": "Sign out",
@@ -146,7 +144,8 @@ export default function Navigation(props) {
             <MenuIcon />
           </IconButton>
           <Link
-            href="#"
+            component={CustomLink}
+            to="/"
             variant="h5"
             color="inherit"
             underline="none"
@@ -155,7 +154,8 @@ export default function Navigation(props) {
             {brand}
           </Link>
           <Link
-            href="#"
+            component={CustomLink}
+            to="/"
             variant="h5"
             color="inherit"
             underline="none"
@@ -207,42 +207,25 @@ export default function Navigation(props) {
           <List>
             <ListItem
               button
-              key={content["link1"]}
-              component={CustomLink}
-              to="/"
-            >
-              <ListItemIcon>
-                <AppsIcon />
-              </ListItemIcon>
-              <ListItemText primary={content["link1"]} />
-            </ListItem>
-            <ListItem
-              button
-              key={content["link2"]}
-              component={CustomLink}
-              to="/home"
-            >
-              <ListItemIcon>
-                <BusinessCenterIcon />
-              </ListItemIcon>
-              <ListItemText primary={content["link2"]} />
-            </ListItem>
-            <ListItem
-              button
-              key={content["link3"]}
+              key={content["product"]}
               component={CustomLink}
               to="/services"
             >
               <ListItemIcon>
                 <LiveHelpIcon />
               </ListItemIcon>
-              <ListItemText primary={content["link3"]} />
+              <ListItemText primary={content["product"]} />
             </ListItem>
-            <ListItem button key={content["link4"]}>
+            <ListItem
+              button
+              key={content["contact"]}
+              component={CustomLink}
+              to="/contact"
+            >
               <ListItemIcon>
                 <AttachMoneyIcon />
               </ListItemIcon>
-              <ListItemText primary={content["link4"]} />
+              <ListItemText primary={content["contact"]} />
             </ListItem>
           </List>
         </div>
@@ -250,34 +233,27 @@ export default function Navigation(props) {
       <Drawer anchor="left" open={state.open} onClose={toggleDrawer(false)}>
         <div className={classes.drawerContainer}>
           <List>
-            <ListItem button key={content["link1"]}>
-              <ListItemIcon>
-                <AppsIcon />
-              </ListItemIcon>
-              <ListItemText primary={content["link1"]} />
-            </ListItem>
-            <ListItem button key={content["link2"]}>
-              <ListItemIcon>
-                <BusinessCenterIcon />
-              </ListItemIcon>
-              <ListItemText primary={content["link2"]} />
-            </ListItem>
             <ListItem
               button
-              key={content["link3"]}
+              key={content["product"]}
               component={CustomLink}
-              to="/service"
+              to="/services"
             >
               <ListItemIcon>
                 <LiveHelpIcon />
               </ListItemIcon>
-              <ListItemText primary={content["link3"]} />
+              <ListItemText primary={content["product"]} />
             </ListItem>
-            <ListItem button key={content["link4"]}>
+            <ListItem
+              button
+              key={content["contact"]}
+              component={CustomLink}
+              to="/contact"
+            >
               <ListItemIcon>
                 <AttachMoneyIcon />
               </ListItemIcon>
-              <ListItemText primary={content["link4"]} />
+              <ListItemText primary={content["contact"]} />
             </ListItem>
           </List>
         </div>

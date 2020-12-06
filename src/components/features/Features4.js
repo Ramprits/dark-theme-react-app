@@ -9,6 +9,7 @@ import StorageIcon from "@material-ui/icons/Storage";
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import ShutterSpeedIcon from "@material-ui/icons/ShutterSpeed";
 import PublicIcon from "@material-ui/icons/Public";
+import CardComponent from "../card/Card";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -61,15 +62,7 @@ export default function Features(props) {
             <Grid item xs={12} lg={8}>
               <Grid container spacing={6}>
                 <Grid item xs={12} sm={6}>
-                  <Box mb={2} display="flex" alignItems="center">
-                    <StorageIcon color="primary" className={classes.icon} />
-                    <Typography variant="h5" component="h3">
-                      {content["col1-header"]}
-                    </Typography>
-                  </Box>
-                  <Typography variant="body1" component="p">
-                    {content["col1-desc"]}
-                  </Typography>
+                  <CardComponent />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Box mb={2} display="flex" alignItems="center">
